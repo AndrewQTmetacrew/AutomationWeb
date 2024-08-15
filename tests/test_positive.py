@@ -8,6 +8,7 @@ class TestPositiveScenario:
     @pytest.mark.positive
     def test_positive_login(self, driver):
         login_page = LoginPage(driver)
+        logged_in = LoggedInSuccessfullyPage(driver)
         # Open page
         login_page.open()
 
@@ -15,7 +16,6 @@ class TestPositiveScenario:
         login_page.execute_login("student", "Password123")
 
         # Verify new page URL contains practicetestautomation.com/logged-in-successfully/
-        logged_in = LoggedInSuccessfullyPage(driver)
         assert logged_in.expected_url == login_page.current_url , "Actual URL is not the same as the expected URL"
 
         # Verify new page contains expected text ('Congratulations' or 'successfully logged in')
