@@ -27,4 +27,4 @@ class LoggedInSuccessfullyPage(BasePage):
 
     @property
     def is_logout_button_is_displayed(self) -> bool:
-        return super()._is_displayed(self.__logout_btn_locator)
+        return super().is_displayed(self.__logout_btn_locator)
