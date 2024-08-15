@@ -35,7 +35,7 @@ def driver(request, setup_env):
         pytest.fail("Unsupported browser")
     # Go to webpage
     driver.get(setup_env)
-    driver.implicitly_wait(10)
+    # driver.implicitly_wait(10)
     yield driver
     time.sleep(1)
     driver.quit()

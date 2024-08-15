@@ -4,18 +4,24 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+from page_objects.exceptions_page import ExceptionPage
+
 
 class TestException:
-    def test_exception(self):
-        driver = webdriver.Edge()
-        driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+    @pytest.mark.exceptions
+    @pytest.mark.debug
+    def test_exception(self, driver):
+        exception_action1 = ExceptionPage(driver)
+        # Open page
+        exception_action1.open()
 
-        add_btn_locator = driver.find_element(By.ID, "add_btn")
-        add_btn_locator.click()
-        wait = WebDriverWait(driver, 10)
-        row2_locator = wait.until(EC.visibility_of_element_located((By.XPATH, "//div[@id='row2']/input")))
-        assert row2_locator.is_displayed()
+        # Click Add button
+        exception_action1.add_second_row()
 
+        # Verify row2 input is displayed
+        assert exception_action1.is_row2_displayed, "Row 2 input should be displayed, but it's not"
+
+    @pytest.mark.exceptions
     def test_stale_element_reference_exception(self):
         #Open page
         driver = webdriver.Edge()
