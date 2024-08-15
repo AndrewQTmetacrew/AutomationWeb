@@ -10,7 +10,7 @@ from page_objects.exceptions_page import ExceptionPage
 class TestException:
     @pytest.mark.exceptions
     @pytest.mark.debug
-    def test_exception(self, driver):
+    def test_no_such_element_exception(self, driver):
         exception_action1 = ExceptionPage(driver)
         # Open page
         exception_action1.open()
