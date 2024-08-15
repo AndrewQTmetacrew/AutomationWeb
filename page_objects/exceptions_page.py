@@ -6,20 +6,32 @@ from page_objects.base_page import BasePage
 
 class ExceptionPage(BasePage):
     __url = "https://practicetestautomation.com/practice-test-exceptions/"
-    __add_btn = (By.ID, "add_btn")
-    __row1_locator = (By.XPATH, "//div[@id='row1']/input")
-    __row2_locator = (By.XPATH, "//div[@id='row2']/input")
+    __add_btn_locator = (By.ID, "add_btn")
+    __row1_input_locator = (By.XPATH, "//div[@id='row1']/input")
+    __row2_input_locator = (By.XPATH, "//div[@id='row2']/input")
+    __row2_save_btn_locator = (By.XPATH, "//div[@id = 'row2']/button[@name= 'Save']")
+    __confirmation_message = (By.XPATH, "//div[@id = 'confirmation']")
 
     def __init__(self, driver: webdriver):
         super().__init__(driver)
+
 
     def open(self):
         super().open_url(self.__url)
 
     def add_second_row(self):
-        super()._click(self.__add_btn)
-        super()._wait_until_element_visible(self.__row2_locator)
+        super()._click(self.__add_btn_locator)
+        super()._wait_until_element_visible(self.__row2_input_locator)
 
     @property
     def is_row2_displayed(self) -> bool:
-        return super().is_displayed(self.__row2_locator)
+        return super().is_displayed(self.__row2_input_locator)
+
+    def add_row2_food(self, text: str):
+        super()._type(self.__row2_input_locator, text)
+        super()._click(self.__row2_save_btn_locator)
+        super()._wait_until_element_visible(self.__confirmation_message, 3)
+
+    @property
+    def get_confirmation_message(self)-> str:
+        return super().get_text(self.__confirmation_message, 3)
