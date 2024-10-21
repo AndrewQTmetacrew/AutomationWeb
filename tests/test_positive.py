@@ -9,8 +9,9 @@ class TestPositiveScenario:
     def test_positive_login(self, driver):
         login_page = LoginPage(driver)
         logged_in = LoggedInSuccessfullyPage(driver)
+
         # Open page
-        login_page.open()
+        # login_page.open()
 
         # Type username, password , submit button
         login_page.execute_login("student", "Password123")
